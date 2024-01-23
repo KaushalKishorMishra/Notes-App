@@ -34,6 +34,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+        allowNull: false,
       },
       tagName: {
         type: DataTypes.STRING,
@@ -51,6 +52,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     {
       sequelize,
       modelName: "Tag",
+      timestamps: true,
     }
   );
   return Tag;

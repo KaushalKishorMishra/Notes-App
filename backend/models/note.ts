@@ -35,6 +35,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
+        allowNull: false,
+        defaultValue: DataTypes.UUIDV4,
       },
       title: {
         type: DataTypes.STRING,
@@ -56,6 +58,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     {
       sequelize,
       modelName: "Note",
+      timestamps: true,
     }
   );
   return Note;
