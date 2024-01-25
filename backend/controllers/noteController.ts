@@ -8,19 +8,23 @@ export class NoteControllers {
     next: NextFunction
   ) => {
     const { title, description, image, noteStatus } = req.body;
-    try {
-      const newNote = await NoteRepository.create({
-        title,
-        description,
-        image,
-        noteStatus,
-      });
-      res
-        .status(201)
-        .json({ message: `Successfully added new note: ${newNote}` });
-    } catch (error) {
-      console.error(`Error in creating a new note!: ${error}`);
-      res.status(500).send(`Error in creating a new note!: ${error}`);
+    if (await NoteRepository.findByName(title)) {
+      res.status(409).send(`Note with title ${title} already exists!`);
+    } else {
+      try {
+        const newNote = await NoteRepository.create({
+          title,
+          description,
+          image,
+          noteStatus,
+        });
+        res
+          .status(201)
+          .json({ message: `Successfully added new note: ${newNote}` });
+      } catch (error) {
+        console.error(`Error in creating a new note!: ${error}`);
+        res.status(500).send(`Error in creating a new note!: ${error}`);
+      }
     }
   };
 
