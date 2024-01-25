@@ -4,6 +4,7 @@ import { Model } from "sequelize";
 interface NoteTagsAttributes {
   NoteId: string;
   TagId: number;
+  id: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -18,6 +19,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
      */
     NoteId!: string;
     TagId!: number;
+    id!: number;
 
     static associate(models: any) {
       // define association here
@@ -25,6 +27,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
   }
   NoteTags.init(
     {
+      id:{
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER
+      },
       NoteId: {
         type: DataTypes.STRING,
         allowNull: false,
