@@ -2,9 +2,9 @@
 import { Model } from "sequelize";
 
 interface NoteTagsAttributes {
+  id: number;
   NoteId: string;
   TagId: number;
-  id: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -17,9 +17,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    id!: number;
     NoteId!: string;
     TagId!: number;
-    id!: number;
 
     static associate(models: any) {
       // define association here
@@ -27,14 +27,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
   }
   NoteTags.init(
     {
-      id:{
-        allowNull: false,
+      id: {
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
       NoteId: {
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
           model: "Notes",
@@ -46,7 +46,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         allowNull: false,
         references: {
           model: "Tags",
-          key: "id", 
+          key: "id",
         },
       },
     },

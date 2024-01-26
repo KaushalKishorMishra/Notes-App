@@ -4,7 +4,6 @@ import { Model } from "sequelize";
 interface TagAttributes {
   id: number;
   tagName: string;
-  tagImage: string;
   tagStatus: string;
 }
 
@@ -18,7 +17,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
     id!: number;
     tagName!: string;
-    tagImage!: string;
     tagStatus!: string;
 
     static associate(models: any) {
@@ -40,13 +38,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      tagImage: {
-        type:DataTypes.STRING,
-        allowNull: true,
-      },
       tagStatus: {
         type: DataTypes.STRING,
-        defaultValue: "inactive",
+        defaultValue: "active",
+        allowNull: false,
       },
     },
     {
