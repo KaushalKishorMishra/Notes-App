@@ -4,13 +4,13 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('NoteTags', {
       id: {
-        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       NoteId: {
-        type: Sequelize.STRING,
+        type: Sequelize.UUID,
         allowNull: false,
         references: {
           model: 'Notes',
@@ -19,7 +19,7 @@ module.exports = {
         
       },
       TagId: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'Tags',
