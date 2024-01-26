@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { NoteRepository } from "../repository/noteRepository";
+import { NoteTagsRepository } from "../repository/noteTagsRepository";
 
 export class NoteControllers {
   static createNote = async (
@@ -20,7 +21,7 @@ export class NoteControllers {
         });
         res
           .status(201)
-          .json({ message: `Successfully added new note: ${newNote}` });
+          .json({ message: `Successfully added new note.`, newNote });
       } catch (error) {
         console.error(`Error in creating a new note!: ${error}`);
         res.status(500).send(`Error in creating a new note!: ${error}`);
@@ -39,13 +40,14 @@ export class NoteControllers {
       res.status(404).send(`Note with id ${id} not found!`);
     } else {
       try {
-        const updatedNote = await NoteRepository.update(
+        await NoteRepository.update(
           { title, description, image, noteStatus },
           String(id)
         );
+        const updatedNote = await NoteRepository.findByPK(String(id));
         res
           .status(200)
-          .json({ message: `Successfully updated note: ${updatedNote}` });
+          .json({ message: `Successfully updated note.` ,updatedNote});
       } catch (error) {
         console.error(`Error in updating note!: ${error}`);
         res.status(500).send(`Error in updating note!: ${error}`);
@@ -64,10 +66,12 @@ export class NoteControllers {
       res.status(404).send(`Note with id ${id} not found!`);
     } else {
       try {
-        const deletedNote = await NoteRepository.delete(String(id));
+        const deletedNote = await NoteRepository.findByPK(String(id));
+        await NoteTagsRepository.deleteNoteByNoteId(String(id));
+        await NoteRepository.delete(String(id));
         res
           .status(200)
-          .json({ message: `Successfully deleted note: ${deletedNote}` });
+          .json({ message: `Successfully deleted note.`, deletedNote });
       } catch (error) {
         console.error(`Error in deleting note!: ${error}`);
         res.status(500).send(`Error in deleting note!: ${error}`);
