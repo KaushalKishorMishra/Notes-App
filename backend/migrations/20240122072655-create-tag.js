@@ -5,21 +5,18 @@ module.exports = {
     await queryInterface.createTable('Tags', {
       id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        allowNull: false,
       },
       tagName: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      tagImage: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
       tagStatus: {
         type: Sequelize.STRING,
-        defaultValue: "inactive"
+        defaultValue: "active",
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

@@ -1,8 +1,12 @@
-import { createNote } from "../controllers/noteController";
+import { NoteControllers } from "../controllers/noteController";
 import { Router } from "express";
 
 const router = Router();
 
-router.post("/create", createNote);
+router.post("/create", NoteControllers.createNote);
+router.patch("/update/:id", NoteControllers.updateNote);
+router.delete("/delete/:id", NoteControllers.deleteNote);
+router.get("/find/allNotes", NoteControllers.getAllNotes);
+router.get("/find/:title", NoteControllers.getNoteByName);
 
 export default router;
