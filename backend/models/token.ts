@@ -1,14 +1,16 @@
 "use strict";
 import { Model } from "sequelize";
 
-interface TagAttributes {
+interface TokenAttributes {
   id: number;
-  tagName: string;
-  tagStatus: string;
+  purpose: string;
+  value: string;
+  expiry: Date;
+  userId: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Tag extends Model<TagAttributes> implements TagAttributes {
+  class Token extends Model<TokenAttributes> implements TokenAttributes {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -16,37 +18,50 @@ module.exports = (sequelize: any, DataTypes: any) => {
      */
 
     id!: number;
-    tagName!: string;
-    tagStatus!: string;
+    purpose!: string;
+    value!: string;
+    expiry!: Date;
+    userId!: number;
 
     static associate(models: any) {
       // define association here
-      Tag.belongsToMany(models.Note, { through: "NoteTags" })
     }
   }
-  Tag.init(
+  Token.init(
     {
-      id: {
+      id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      tagName: {
+      purpose:{
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
-      tagStatus: {
+      value: {
         type: DataTypes.STRING,
-        defaultValue: "active",
+        allowNull: true,
+      },
+      expiry: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      userId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+        references:{
+          model: "User",
+          key: "id",
+        }
       },
     },
     {
       sequelize,
-      modelName: "Tag",
-      timestamps: true,
+      modelName: "Token",
+      timestamps:true,
+      tableName: "Tokens",
     }
   );
-  return Tag;
+  return Token;
 };

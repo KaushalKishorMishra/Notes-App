@@ -1,27 +1,27 @@
 import db from "../models";
 
 export class NoteRepository {
-    static async create(noteData:{title:string,description:string,image:string,noteStatus:string}){
-        return await db.Note.create(noteData);
-    }
+  static async create(noteData: object) {
+    return await db.Note.create(noteData);
+  }
 
-    static async update(noteData:{title:string,description:string,image:string,noteStatus:string},id:string){
-        return await db.Note.update(noteData,{where:{id}});
-    }
+  static async update(newNoteData: object, key: string) {
+    return await db.Note.update(newNoteData, { where: { key } });
+  }
 
-    static async delete(id:string){
-        return await db.Note.destroy({where:{id}});
-    }
+  static async delete(key: string) {
+    return await db.Note.destroy({ where: { key } });
+  }
 
-    static async findAll(){
-        return await db.Note.findAll();
-    }
+  static async findAll() {
+    return await db.Note.findAll();
+  }
 
-    static async findByPK(id:string){
-        return await db.Note.findByPk(id);
-    }
+  static async findByPK(key: string) {
+    return await db.Note.findByPk(key);
+  }
 
-    static async findByName(title:string){
-        return await db.Note.findAll({where:{title}});
-    }
-} 
+  static async findByName(title: string) {
+    return await db.Note.findAll({ where: { title } });
+  }
+}
