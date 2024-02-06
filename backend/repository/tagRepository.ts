@@ -16,6 +16,7 @@ export class TagRepository {
   static async findAll() {
     return await db.Tag.findAll();
   }
+  
 
   static async findByPK(id: number) {
     return await db.Tag.findByPk(id);

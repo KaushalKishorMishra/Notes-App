@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import { TagRepository } from "../repository/tagRepository";
-import { NoteTagsRepository } from "../repository/noteTagsRepository";
 
 export class TagControllers {
   static createTag = async (
@@ -63,7 +62,6 @@ export class TagControllers {
     } else {
       try {
         const deletedTag = await TagRepository.findByPK(Number(id));
-        await NoteTagsRepository.deleteTagByTagId(Number(id));
         await TagRepository.delete(Number(id));
         res
           .status(200)

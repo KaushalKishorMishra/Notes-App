@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { NoteRepository } from "../repository/noteRepository";
-import { NoteTagsRepository } from "../repository/noteTagsRepository";
 
 export class NoteControllers {
   static createNote = async (
@@ -67,7 +66,6 @@ export class NoteControllers {
     } else {
       try {
         const deletedNote = await NoteRepository.findByPK(String(id));
-        await NoteTagsRepository.deleteNoteByNoteId(String(id));
         await NoteRepository.delete(String(id));
         res
           .status(200)
