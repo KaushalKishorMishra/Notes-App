@@ -25,12 +25,16 @@ router.post(
   GlobalMiddleware.checkValidationError,
   UserControllers.signUp
 );
+
+
 router.post(
   "/signin",
   UserValidator.loginValidation(),
   GlobalMiddleware.checkValidationError,
   UserControllers.signIn
 );
+
+
 router.post(
   "/forgot-password",
   UserValidator.forgotPasswordValidation(),
@@ -38,18 +42,23 @@ router.post(
   // UserControllers.forgotPassword
 );
 
+
 router.patch(
   "/verify-email/:token",
   UserValidator.verifyEmailValidation(),
   GlobalMiddleware.checkValidationError,
   UserControllers.verifyEmail
 );
+
+
 router.patch(
   "/resend-verification-token",
   UserValidator.resendVerificationTokenValidation(),
   GlobalMiddleware.checkValidationError,
   UserControllers.resendConfirmation
 );
+
+
 router.patch(
   "/reset-password",
   GlobalMiddleware.authorization,
@@ -57,6 +66,8 @@ router.patch(
   GlobalMiddleware.checkValidationError,
   UserControllers.resetPassword
 );
+
+
 router.patch(
   "/update-profile",
   GlobalMiddleware.authorization,
@@ -64,6 +75,8 @@ router.patch(
   GlobalMiddleware.checkValidationError,
   UserControllers.updateUser
 );
+
+
 
 router.delete(
   "/delete-user",
