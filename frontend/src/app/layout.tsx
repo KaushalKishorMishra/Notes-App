@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-
 import dotenv from "dotenv"
 
 import '../styles/globals.css'
 
 export const metadata: Metadata = {
-  title: "Notes",
-  description: "A Notes app that is different form other.",
+  title: "NoteVerse",
+  description: "A free notes app that is different form others and is open source/",
 };
 
 export default function RootLayout({
@@ -16,8 +15,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="light">
-      <head>
-      </head>
       <body>{children}</body>
     </html>
   );

@@ -1,4 +1,4 @@
-type FormState = {
+interface FormState {
     accountInfo: {
         avatar: string
         userName: string
@@ -14,6 +14,15 @@ type FormState = {
         gender: string
         dateOfBirth: string
     }
+    // avatar: string
+    // userName: string
+    // email: string
+    // password: string
+    // confirmPassword: string
+    // phone: string
+    // address: string
+    // gender: string
+    // dateOfBirth: string
 }
 
 export default FormState

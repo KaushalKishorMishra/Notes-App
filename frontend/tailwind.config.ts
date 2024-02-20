@@ -7,6 +7,10 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    colors: {
+      'customPrimary': '#ffd2d4',
+      'customSecondary': '#341848'
+    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -17,7 +21,17 @@ const config: Config = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["light", "dark", "cyberpunk", "coffee"],
+    themes: [
+      "light",
+      "dark",
+      "cyberpunk",
+      "coffee",
+      "synthwave",
+      "retro",
+      "black",
+      "luxury",
+      "dracula",
+    ],
   },
 };
 export default config;

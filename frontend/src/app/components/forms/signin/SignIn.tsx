@@ -18,7 +18,7 @@ const SignInForm = () => {
                     <div className="divider divider-accent text-accent">OR</div>
                     <div>
                         If not registered.
-                    <a href="pages/signup" className="ms-3 link px-3 py-2 hover:bg-blue-300 italic font-bold">
+                    <a href="" className="ms-3 link px-3 py-2 hover:bg-blue-300 italic font-bold">
                         Register Here
                     </a>
                     </div>
