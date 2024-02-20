@@ -62,13 +62,18 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         unique: true,
       },
-      gender: DataTypes.STRING,
+      gender: {
+        type: DataTypes.STRING,
+      },
       avatar: {
         type: DataTypes.STRING,
-        allowNull: true,
         defaultValue: "default.png",
+        allowNull: true,
       },
-      date_of_birth: DataTypes.DATE,
+      date_of_birth: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       type: {
         type: DataTypes.STRING,
         defaultValue: "user",
@@ -82,7 +87,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       sequelize,
       modelName: "User",
       timestamps: true,
-      tableName: "User",
+      tableName: "Users",
     }
   );
   return User;

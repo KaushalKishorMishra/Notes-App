@@ -28,13 +28,13 @@ module.exports = {
       gender: {
         type: Sequelize.STRING
       },
-      avatar:{
+      avatar: {
         type: Sequelize.STRING,
         defaultValue: 'default.png',
         allowNull: true,
       },
       date_of_birth: {
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       type: {
         type: Sequelize.STRING,

@@ -7,6 +7,7 @@ interface NoteAttributes {
   description: string;
   image: string;
   noteStatus: string;
+  userId: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -22,6 +23,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     description!: string;
     image!: string;
     noteStatus!: string;
+    userId!: number
 
     static associate(models: any) {
       // define association here3+
@@ -52,11 +54,16 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      userId:{
+        type:DataTypes.INTEGER,
+        
+      }
     },
     {
       sequelize,
       modelName: "Note",
       timestamps: true,
+      tableName:"Notes"
     }
   );
   return Note;

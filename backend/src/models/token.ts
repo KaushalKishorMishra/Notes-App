@@ -3,9 +3,7 @@ import { Model } from "sequelize";
 
 interface TokenAttributes {
   id: number;
-  purpose: string;
   value: string;
-  expiry: Date;
   userId: number;
 }
 
@@ -18,9 +16,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
      */
 
     id!: number;
-    purpose!: string;
     value!: string;
-    expiry!: Date;
     userId!: number;
 
     static associate(models: any) {
@@ -29,37 +25,29 @@ module.exports = (sequelize: any, DataTypes: any) => {
   }
   Token.init(
     {
-      id:{
+      id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      purpose:{
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
       value: {
         type: DataTypes.STRING,
-        allowNull: true,
-      },
-      expiry: {
-        type: DataTypes.DATE,
         allowNull: true,
       },
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references:{
-          model: "User",
+        references: {
+          model: "Users",
           key: "id",
-        }
+        },
       },
     },
     {
       sequelize,
       modelName: "Token",
-      timestamps:true,
+      timestamps: true,
       tableName: "Tokens",
     }
   );

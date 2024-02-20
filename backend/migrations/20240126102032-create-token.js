@@ -9,24 +9,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      purpose: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
       value: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      expiry: {
-        type: Sequelize.DATE,
-        allowNull: true,
-      },
       userId: {
-        type: Sequelize.NUMBER,
-        allowNull:false,
-        references:{
-          model:"User",
-          key:"id"
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Users",
+          key: "id"
         }
       },
       createdAt: {

@@ -46,6 +46,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       sequelize,
       modelName: "Tag",
       timestamps: true,
+      tableName:"Tags"
     }
   );
   return Tag;

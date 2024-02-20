@@ -4,8 +4,8 @@ import dotenv from 'dotenv';
 const port = 5000;
 
 
-import db from './models/index'
-import { MainRoutes } from './routes/MainRoutes' 
+import db from './src/models/index'
+import { MainRoutes } from './src/routes/MainRoutes' 
 
 
 dotenv.config();
