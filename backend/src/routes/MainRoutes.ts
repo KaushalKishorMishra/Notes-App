@@ -6,14 +6,7 @@ import userRoutes from "./userRoutes";
 
 export class MainRoutes {
   public app: express.Application = express();
-  public auth0Config = {
-    authRequired: true,
-    auth0Logout: true,
-    baseURL: "http://localhost:3000",
-    clientID: "",
-    issuerBaseURL: "",
-    secret: "",
-  };
+
   constructor() {
     this.config();
     this.setRoutes();
