@@ -8,9 +8,10 @@ export class TagControllers {
     next: NextFunction
   ) => {
     const { tagName, tagStatus } = req.body;
-    const tag = await TagRepository.findByName(tagName);
+    const tag = await TagRepository.findOne({ tagName: tagName });
+    console.log(tag);
     if (tag) {
-      res.status(409).send(`Tag with name ${tagName} already exists!`);
+      res.status(409).send(`Tag name already exists!`);
     } else {
       try {
         const newTag = await TagRepository.create({
@@ -34,12 +35,14 @@ export class TagControllers {
   ) => {
     const { tagName, tagImage, tagStatus } = req.body;
     const { id } = req.params;
-    if (!(await TagRepository.findByPK(Number(id)))) {
+    // if (!(await TagRepository.findByPK(Number(id)))) {
+    if (!(await TagRepository.findOne({ id: id }))) {
       res.status(404).send(`Tag with id ${id} not found!`);
     } else {
       try {
         await TagRepository.update({ tagName, tagStatus }, Number(id));
-        const updatedTag = await TagRepository.findByPK(Number(id));
+        // const updatedTag = await TagRepository.findByPK(Number(id));
+        const updatedTag = await TagRepository.findOne({ id: id });
         res
           .status(200)
           .json({ message: `Successfully updated tag.`, updatedTag });
@@ -56,12 +59,14 @@ export class TagControllers {
     next: NextFunction
   ) => {
     const { id } = req.params;
-    const tag = await TagRepository.findByPK(Number(id));
+    // const tag = await TagRepository.findByPK(Number(id));
+    const tag = await TagRepository.findOne({ id: id });
     if (!tag) {
       res.status(404).send(`Tag with id ${id} not found!`);
     } else {
       try {
-        const deletedTag = await TagRepository.findByPK(Number(id));
+        // const deletedTag = await TagRepository.findByPK(Number(id));
+        const deletedTag = await TagRepository.findOne({ id: id });
         await TagRepository.delete(Number(id));
         res
           .status(200)
@@ -98,11 +103,13 @@ export class TagControllers {
   ) => {
     const { tagName } = req.params;
 
-    if ((await TagRepository.findByName(tagName)) === null) {
+    // if ((await TagRepository.findByName(tagName)) === null)
+    if ((await TagRepository.findOne({ tagName: tagName })) === null) {
       res.status(404).send(`Tag with name ${tagName} not found!`);
     } else {
       try {
-        const tag = await TagRepository.findByName(tagName);
+        // const tag = await TagRepository.findByName(tagName);
+        const tag = await TagRepository.findOne({ tagName: tagName });
         if (!tag) {
           res.status(404).send(`Tag with name ${tagName} not found!`);
         } else {
@@ -115,32 +122,33 @@ export class TagControllers {
     }
   };
 
-  static getTagByTagStatus = async(
-    req:Request,
-    res:Response,
-    next:NextFunction
-  ) =>{
-    const {tagStatus} = req.params;
-    if((await TagRepository.findTagByStatus(tagStatus)) === "active" || "inactive"){
+  static getTagByTagStatus = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { tagStatus } = req.params;
+    if (
+      // (await TagRepository.findTagByStatus(tagStatus)) === "active"
+      (await TagRepository.findOne({ tagStatus: tagStatus })) === "active" ||
+      "inactive"
+    ) {
       console.log("I am here");
       res.status(404).send(`Tag with status ${tagStatus} not found!`);
-  }
-  else{
-      try{
-          const tag = await TagRepository.findTagByStatus(tagStatus);
-          console.log("I am here",tag);
-          if(!tag){
-              res.status(404).send(`Tag with status ${tagStatus} not found!`);
-          }
-          else{
-              res.status(200).json({tag});
-          }
+    } else {
+      try {
+        // const tag = await TagRepository.findTagByStatus(tagStatus);
+        const tag = await TagRepository.findOne({ tagStatus: tagStatus });
+        console.log("I am here", tag);
+        if (!tag) {
+          res.status(404).send(`Tag with status ${tagStatus} not found!`);
+        } else {
+          res.status(200).json({ tag });
+        }
+      } catch (error) {
+        console.error(`Error in retrieving tag by status!: ${error}`);
+        res.status(500).send(`Error in retrieving tag by status!: ${error}`);
       }
-      catch(error){
-          console.error(`Error in retrieving tag by status!: ${error}`);
-          res.status(500).send(`Error in retrieving tag by status!: ${error}`);
-      }
-  }
-}
-
+    }
+  };
 }

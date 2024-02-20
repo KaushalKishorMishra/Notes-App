@@ -8,5 +8,6 @@ router.patch("/update/:id", NoteControllers.updateNote);
 router.delete("/delete/:id", NoteControllers.deleteNote);
 router.get("/find/allNotes", NoteControllers.getAllNotes);
 router.get("/find/:title", NoteControllers.getNoteByName);
+router.get("/:noteId", NoteControllers.addTagToNote);
 
 export default router;

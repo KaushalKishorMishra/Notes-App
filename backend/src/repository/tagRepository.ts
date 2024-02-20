@@ -16,17 +16,20 @@ export class TagRepository {
   static async findAll() {
     return await db.Tag.findAll();
   }
-  
 
-  static async findByPK(id: number) {
-    return await db.Tag.findByPk(id);
+  static async findOne(key: object) {
+    return await db.Tag.findOne({ where: { ...key } });
   }
 
-  static async findByName(tagName: string) {
-    return await db.Tag.findAll({ where: { tagName } });
-  }
+  // static async findByPK(id: number) {
+  //   return await db.Tag.findByPk(id);
+  // }
 
-  static async findTagByStatus(tagStatus: string) {
-    return await db.Tag.findAll({ where: { tagStatus} });
-  }
+  // static async findByName(tagName: string) {
+  //   return await db.Tag.findAll({ where: { tagName } });
+  // }
+
+  // static async findTagByStatus(tagStatus: string) {
+  //   return await db.Tag.findAll({ where: { tagStatus} });
+  // }
 }

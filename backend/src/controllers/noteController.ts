@@ -7,24 +7,20 @@ export class NoteControllers {
     res: Response,
     next: NextFunction
   ) => {
-    const { title, description, image, noteStatus } = req.body;
-    if (await NoteRepository.findByName(title)) {
-      res.status(409).send(`Note with title ${title} already exists!`);
-    } else {
-      try {
-        const newNote = await NoteRepository.create({
-          title,
-          description,
-          image,
-          noteStatus,
-        });
-        res
-          .status(201)
-          .json({ message: `Successfully added new note.`, newNote });
-      } catch (error) {
-        console.error(`Error in creating a new note!: ${error}`);
-        res.status(500).send(`Error in creating a new note!: ${error}`);
-      }
+    try {
+      const { title, description, image, noteStatus } = req.body;
+      const newNote = await NoteRepository.create({
+        title,
+        description,
+        image,
+        noteStatus,
+      });
+      res
+        .status(201)
+        .json({ message: `Successfully added new note.`, newNote });
+    } catch (error) {
+      console.error(`Error in creating a new note!: ${error}`);
+      res.status(500).send(`Error in creating a new note!: ${error}`);
     }
   };
 
@@ -35,7 +31,7 @@ export class NoteControllers {
   ) => {
     const { title, description, image, noteStatus } = req.body;
     const { id } = req.params;
-    if (!(await NoteRepository.findByPK(String(id)))) {
+    if (!(await NoteRepository.findOne({ id: id }))) {
       res.status(404).send(`Note with id ${id} not found!`);
     } else {
       try {
@@ -43,10 +39,10 @@ export class NoteControllers {
           { title, description, image, noteStatus },
           String(id)
         );
-        const updatedNote = await NoteRepository.findByPK(String(id));
+        const updatedNote = await NoteRepository.findOne({ id: id });
         res
           .status(200)
-          .json({ message: `Successfully updated note.` ,updatedNote});
+          .json({ message: `Successfully updated note.`, updatedNote });
       } catch (error) {
         console.error(`Error in updating note!: ${error}`);
         res.status(500).send(`Error in updating note!: ${error}`);
@@ -60,12 +56,12 @@ export class NoteControllers {
     next: NextFunction
   ) => {
     const { id } = req.params;
-    const note = await NoteRepository.findByPK(String(id));
+    const note = await NoteRepository.findOne({ id: id });
     if (!note) {
       res.status(404).send(`Note with id ${id} not found!`);
     } else {
       try {
-        const deletedNote = await NoteRepository.findByPK(String(id));
+        const deletedNote = await NoteRepository.findOne({ id: id });
         await NoteRepository.delete(String(id));
         res
           .status(200)
@@ -101,7 +97,7 @@ export class NoteControllers {
     next: NextFunction
   ) => {
     const { title } = req.params;
-    if ((await NoteRepository.findByName(title)) === null) {
+    if ((await NoteRepository.findOne({ title: title })) === null) {
       res.status(404).send(`Note with title ${title} not found!`);
     } else {
       try {
@@ -110,6 +106,30 @@ export class NoteControllers {
       } catch (error) {
         console.error(`Error in getting note by name!: ${error}`);
         res.status(500).send(`Error in getting note by name!: ${error}`);
+      }
+    }
+  };
+
+  static addTagToNote = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    // const { noteId, tagId } = req.body;
+    const noteId = req.params.noteId;
+    const tagId = req.body.tagId;
+    if (!(await NoteRepository.findOne({ id: noteId }))) {
+      res.status(404).send(`Note with id ${noteId} not found!`);
+    } else {
+      try {
+        const note = await NoteRepository.findOne({ id: noteId });
+        await note.addTag(tagId);
+        res
+          .status(200)
+          .json({ message: `Successfully added tag to note.`, note });
+      } catch (error) {
+        console.error(`Error in adding tag to note!: ${error}`);
+        res.status(500).send(`Error in adding tag to note!: ${error}`);
       }
     }
   };

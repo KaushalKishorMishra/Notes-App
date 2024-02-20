@@ -72,14 +72,15 @@ export class UserControllers {
     next: NextFunction
   ) => {
     try {
-      let token = await TokenRepository.findOne({ value: req.params });
+      let token = await TokenRepository.findOne({ value: req.params.token_value });
 
       if (!token) {
         return res
           .status(404)
           .json({ error: "Token not found or might have expired." });
       }
-
+      console.log(token.value);
+      console.log(token.userId);
       let user = await UserRepository.findOne({ id: token.userId });
 
       if (!user) {

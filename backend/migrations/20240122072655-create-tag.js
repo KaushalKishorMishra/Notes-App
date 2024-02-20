@@ -14,9 +14,9 @@ module.exports = {
         allowNull: false,
       },
       tagStatus: {
-        type: Sequelize.STRING,
-        defaultValue: "active",
-        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,

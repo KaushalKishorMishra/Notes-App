@@ -41,7 +41,7 @@ router.post(
 );
 
 router.patch(
-  "/verify-email/:token",
+  "/verify-email/:token_value",
   // "/verify-email",
   UserValidator.verifyEmailValidation(),
   GlobalMiddleware.checkValidationError,

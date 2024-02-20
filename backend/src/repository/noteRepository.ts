@@ -24,4 +24,8 @@ export class NoteRepository {
   static async findByName(title: string) {
     return await db.Note.findAll({ where: { title } });
   }
+
+  static async findOne(key: object) {
+    return await db.Note.findOne({ where: { ...key } });
+  }
 }

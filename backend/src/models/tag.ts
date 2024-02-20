@@ -21,7 +21,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
     static associate(models: any) {
       // define association here
-      Tag.belongsToMany(models.Note, { through: "NoteTags" })
+      Tag.belongsToMany(models.Note, { through: "NoteTags" });
     }
   }
   Tag.init(
@@ -37,16 +37,16 @@ module.exports = (sequelize: any, DataTypes: any) => {
         allowNull: false,
       },
       tagStatus: {
-        type: DataTypes.STRING,
-        defaultValue: "active",
-        allowNull: false,
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull: true,
       },
     },
     {
       sequelize,
       modelName: "Tag",
       timestamps: true,
-      tableName:"Tags"
+      tableName: "Tags",
     }
   );
   return Tag;
