@@ -43,7 +43,6 @@ export class UserControllers {
       const token = await TokenRepository.create({
         value: crypto.randomBytes(16).toString("hex"),
         userId: user.id,
-
       });
       if (!token) {
         return res.status(400).json({ error: "Failed to generate token." });
@@ -59,7 +58,7 @@ export class UserControllers {
         html: `<a href="${url}">Click to verify email ${user.name}</a>`,
       });
 
-      res.status(400).json({ error: "Failed to send email." });
+      // res.status(400).json({ error: "Failed to send email." });
 
       return res.status(200).json({ message: "Account Created", user });
     } catch (err) {
@@ -73,7 +72,7 @@ export class UserControllers {
     next: NextFunction
   ) => {
     try {
-      const token = await TokenRepository.findOne({ value: req.params.value });
+      let token = await TokenRepository.findOne({ value: req.params });
 
       if (!token) {
         return res
@@ -102,7 +101,9 @@ export class UserControllers {
         if (!user) {
           return res.status(400).json({ message: "User not verified" });
         }
-        return res.status(200).json({ message: "User verified." });
+        return res
+          .status(200)
+          .json({ message: "User verified.", data: user.id });
       }
     } catch (error) {
       return res.status(400).json({ message: "User Verification failed" });
