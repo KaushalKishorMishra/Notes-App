@@ -1,49 +1,52 @@
-import { CiShoppingTag } from "react-icons/ci";
+import { TbTagStarred } from "react-icons/tb";
 import { FaChalkboardUser, FaNoteSticky, FaRegTrashCan } from "react-icons/fa6";
+import { MdOutlineSettings } from "react-icons/md";
+import Image from "next/image";
+
+import Logo from "../../../../public/noteverse-logo.png"
 
 const Sidebar = () => {
     return (
         <>
-            <aside className="w-1/6 h-full border bg-customPrimary">
-                <nav className="h-full">
-                    <h1 className="text-2xl font-bold text-center py-5 border-b">Keep Your Notes</h1>
-                    <div className="w-full flex flex-col justify-between h-[92%]">
-                        <div className="">
-                            <div className="text-center py-3 hover:bg-white">
-                                <a href="" className="flex flex-row w-full justify-center items-center text-xl hover:text-primary">
-                                    <span className="pe-3"><FaChalkboardUser /></span>
-                                    <span>
+            <aside className="w-1/12 h-full border rounded-br-badge rounded-tr-badge">
+                <nav className="h-full flex flex-col justify-between items-center">
+                    <Image src={Logo} alt="NoteVerse Logo" className="bg-cs-secondary w-full rounded-e-badge " />
+                    <div className="w-full">
+                        <div className="text-center py-3 group hover:bg-cs-secondary hover:rounded-e-badge">
+                            <a href="" className="flex flex-row w-full justify-center text-cs-secondary items-center group-hover:text-cs-primary text-2xl">
+                                <span className=""><FaChalkboardUser /></span>
+                                {/* <span>
                                         User
-                                    </span>
-                                </a>
-                            </div>
-                            <div className="text-center py-3  hover:bg-white">
-                                <a href="" className="flex flex-row w-full justify-center items-center text-xl hover:text-primary">
-                                    <span className="pe-3"><FaNoteSticky /></span>
-                                    <span>
+                                    </span> */}
+                            </a>
+                        </div>
+                        <div className="text-center py-3 group hover:bg-cs-secondary hover:rounded-e-badge">
+                            <a href="" className="flex flex-row w-full justify-center text-cs-secondary items-center text-2xl hover:text-cs-primary">
+                                <span className=""><FaNoteSticky /></span>
+                                {/* <span>
                                         Note
-                                    </span>
-                                </a>
-                            </div>
-                            <div className="text-center py-3  hover:bg-white">
-                                <a href="" className="flex flex-row w-full justify-center items-center text-xl hover:text-primary">
-                                    <span className="pe-3 font-bold text-2xl"><CiShoppingTag /></span>
-                                    <span>
+                                    </span> */}
+                            </a>
+                        </div>
+                        <div className="text-center py-3 group hover:bg-cs-secondary hover:rounded-e-badge">
+                            <a href="" className="flex flex-row w-full justify-center text-cs-secondary items-center text-2xl hover:text-cs-primary">
+                                <span className=""><TbTagStarred /></span>
+                                {/* <span>
                                         Tag
-                                    </span>
-                                </a>
-                            </div>
+                                    </span> */}
+                            </a>
                         </div>
-                        <div>
-                            <div className="text-center py-3  hover:bg-white">
-                                <a href="" className="flex flex-row w-full justify-center items-center text-xl text-error hover:text-red-600">
-                                    <span className="pe-3"><FaRegTrashCan /></span>
-                                    <span>
+                        <div className="text-center py-3  group hover:bg-cs-secondary hover:rounded-e-badge">
+                            <a href="" className="flex flex-row w-full justify-center text-cs-secondary items-center text-2xl group-hover:text-red-600">
+                                <span className=""><FaRegTrashCan /></span>
+                                {/* <span>
                                         Trash
-                                    </span>
-                                </a>
-                            </div>
+                                    </span> */}
+                            </a>
                         </div>
+                    </div>
+                    <div className="flex justify-center text-2xl py-3 hover:bg-cs-secondary hover:rounded-e-badge w-full">
+                        <MdOutlineSettings />
                     </div>
                 </nav>
             </aside>

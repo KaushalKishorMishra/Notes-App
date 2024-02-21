@@ -17,7 +17,7 @@ export class UserValidator {
   }
 
   static verifyEmailValidation() {
-    return [param("token", "Token is required").isString()];
+    return [param("value", "Token is required").isString()];
   }
 
   static resendVerificationTokenValidation() {

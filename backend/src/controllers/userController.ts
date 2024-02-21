@@ -74,7 +74,7 @@ export class UserControllers {
   ) => {
     try {
       const token = await TokenRepository.findOne({ value: req.params.value });
-
+      console.log(token.userId);
       if (!token) {
         return res
           .status(404)
@@ -163,7 +163,7 @@ export class UserControllers {
         type: user.type,
         purpose: "sign-in",
       };
-      const jwt = JWT.SignJwt(payload, "10d");
+      const jwt = await JWT.SignJwt(payload, "10d");
 
       return res.status(200).json({
         message: "login successful",

@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import db from "../models";
 
 export class TokenRepository {
@@ -10,7 +11,7 @@ export class TokenRepository {
     }
 
     static async findOne(tokenData: object) {
-        return await db.Token.findOne(tokenData);
+        return await db.Token.findOne({where: tokenData});
     }
 
     static async findAll(tokenData: object) {

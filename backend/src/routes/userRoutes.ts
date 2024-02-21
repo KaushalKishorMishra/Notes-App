@@ -39,7 +39,7 @@ router.post(
 );
 
 router.patch(
-  "/verify-email/:token",
+  "/verify-email/:value",
   UserValidator.verifyEmailValidation(),
   GlobalMiddleware.checkValidationError,
   UserControllers.verifyEmail
