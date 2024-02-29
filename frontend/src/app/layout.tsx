@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import dotenv from "dotenv"
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 import '../styles/globals.css'
+import '../styles/waves_patterns.css'
+import Navbar from "./components/templates/Navbar";
+
 
 export const metadata: Metadata = {
   title: "NoteVerse",
@@ -14,11 +18,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="light">
-      <head>
-        <link rel="icon" href="/noteverse.ico" sizes="any" />
-      </head>
-      <body>{children}</body>
-    </html>
+    <UserProvider>
+      <html lang="en" data-theme="light">
+        <head>
+          {/* <link rel="icon" href="../../public/SVG/noteverse-lightmode-logo.svg" /> */}
+        </head>
+        <body>
+          {/* <Navbar /> */}
+          {children}
+        </body>
+      </html>
+    </UserProvider>
   );
 }
