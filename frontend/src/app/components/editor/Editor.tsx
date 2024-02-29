@@ -40,6 +40,8 @@ import { dropCursor } from '@tiptap/pm/dropcursor';
 import Dropcursor from '@tiptap/extension-dropcursor';
 
 const EditorComponent: React.FC = () => {
+
+  
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -78,7 +80,6 @@ const EditorComponent: React.FC = () => {
       Highlight,
       Dropcursor,
     ],
-    content: 'Start Writing Something!',
     onUpdate: ({ editor }) => {
       console.log('Editor content updated:', editor.getHTML());
     },
@@ -89,7 +90,8 @@ const EditorComponent: React.FC = () => {
       {editor && (
         <section className='w-full flex items-center justify-center flex-col'>
           <Toolbar editor={editor} /> {/* Use the Toolbar component */}
-          <EditorContent editor={editor} className='w-6/12 mt-5 h-96 border rounded' />
+
+          <EditorContent editor={editor} className='w-full mt-5 h-auto border rounded prose' />
         </section>
       )}
     </section>

@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <UserProvider>
-      <html lang="en" data-theme="light">
+      <html lang="en" data-theme="dark">
         <head>
           {/* <link rel="icon" href="../../public/SVG/noteverse-lightmode-logo.svg" /> */}
         </head>

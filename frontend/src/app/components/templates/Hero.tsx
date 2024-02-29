@@ -7,7 +7,7 @@ const Hero = () => {
                 <p className="text-8xl font-bold mb-7">
                     Free your notes
                 </p>
-                <Link href={`/signin`} className="btn px-5 rounded">
+                <Link href={`/api/auth/login`} className="btn px-5 rounded">
                     <p className="text-xl">Click Me To Get Started With Creating Your Notes</p>
                 </Link>
             </div>

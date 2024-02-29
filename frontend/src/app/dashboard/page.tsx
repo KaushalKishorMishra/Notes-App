@@ -1,8 +1,15 @@
 import React from 'react'
 import EditorComponent from "@/app/components/editor/Editor"
 import Sidebar from "@/app/components/templates/Sidebar"
+import Alert from "@/app/components/alert/Alert"
 
-import {withPageAuthRequired} from "@auth0/nextjs-auth0"
+import { withPageAuthRequired } from "@auth0/nextjs-auth0"
+
+type messageType = {
+    message: string
+}
+
+
 
 const Page = () => {
     return (
@@ -20,5 +27,5 @@ const Page = () => {
 
 export default withPageAuthRequired(Page, {
     onRedirecting: () => <Loading />,
-    onError: error => <ErrorMessage>{error.message}</ErrorMessage>
-  });
+    onError: message => <Alert message={message} />
+});
