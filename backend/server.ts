@@ -1,12 +1,14 @@
 const express = require('express');
 import dotenv from 'dotenv';
-
+import cors = require('cors')
 const port = 5000;
 
 
 import db from './src/models/index'
 import { MainRoutes } from './src/routes/MainRoutes' 
 
+
+app.use(cors())
 
 dotenv.config();
 const mainRoutes = new MainRoutes();
