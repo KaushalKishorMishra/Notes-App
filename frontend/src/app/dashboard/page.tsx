@@ -26,6 +26,6 @@ const Page = () => {
 }
 
 export default withPageAuthRequired(Page, {
-    onRedirecting: () => <Loading />,
-    onError: message => <Alert message={message} />
+    onRedirecting: () => {},
+    onError: message<messageType> => <Alert message={message} />
 });
